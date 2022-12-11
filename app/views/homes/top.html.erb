@@ -1,0 +1,7 @@
+<% if flash[:notice] %>
+ <div class="alert alert-success" role="alert">
+ <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
+<% end %>
+<h1>Homes#top</h1>
+
+<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
