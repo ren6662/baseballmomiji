@@ -59,7 +59,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  
+
   ##メールアドレス・パスワードをゲストユーザーが消去・変更できないようにする。
   before_action :ensure_normal_user, only: %i[update destroy]
 
