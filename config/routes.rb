@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   namespace :user do
     resources :posts, only:[:new,:index,:show,:edit,:create,:destroy,:update]do
       resource :favorites, only: [:create, :destroy]
-    end
+      member do
+      get :favorites
+      end
+     end
+    resources :users, only:[:index,:show,:edit,:update,:destroy]
   end
 
 end

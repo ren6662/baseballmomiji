@@ -1,0 +1,13 @@
+<% if post.favorited?(current_user) %>
+<!--すでにいいね済みの場合はdestroyアクションへ -->
+  <%= link_to user_post_favorites_path(post.id), method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= post.favorites.count %> いいね
+  <% end %>
+<% else %>
+<!--まだいいねしていない場合はcreateアクションへ-->
+  <%= link_to user_post_favorites_path(post.id), method: :post, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= post.favorites.count %> いいね
+  <% end %>
+<% end %>

@@ -3,15 +3,16 @@
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <%= link_to @post.title, edit_user_post_path %>
       <%= link_to @post.body, edit_user_post_path %>
+      <%= render "user/favorites/favorite-btn", post: @post %>
       <% if @post.favorited?(current_user) %>
     <!--すでにいいね済みの場合はdestroyアクションへ -->
        <%= link_to user_post_favorites_path(@post.id), method: :delete do %>
-        <span style="color:red;">❤︎</span>
+        ♥<%= @post.favorites.count %>
        <% end %>
        <% else %>
     <!--まだいいねしていない場合はcreateアクションへ-->
         <%= link_to user_post_favorites_path(@post.id), method: :post do %>
-        <span>❤︎</span>
+        ♡<%= @post.favorites.count %>
         <% end %>
         <% end %>
   	</div>
