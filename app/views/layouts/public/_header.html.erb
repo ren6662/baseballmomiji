@@ -1,0 +1,51 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-left navbar-brand text-light ml-3" href="/"><span>BHM</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
+
+
+        <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to "マイページ", user_user_path(current_user), class: 'btn nav-link text-light mr-5' %>
+          </li>
+          <li>
+            <%= link_to "新規投稿", new_user_post_path, class: 'btn nav-link text-light mr-5' %>
+          </li>
+          <li>
+            <!--%= link_to "カート", cart_items_path, class: 'btn nav-link text-light mr-5' %-->
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'btn nav-link text-light mr-5' %>
+          </li>
+
+        <% else %>
+          <li>
+            <%= link_to "About", about_path, class: 'btn nav-link text-light mr-5' %>
+          </li>
+          <li>
+            <!--%= link_to "商品一覧", items_path, class: 'btn nav-link text-light mr-5' %-->
+          </li>
+          <li>
+            <%= link_to "新規登録", new_user_registration_path, class: 'btn nav-link text-light mr-5' %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_user_session_path, class: 'btn nav-link text-light' %>
+          </li>
+        <% end %>
+        </ul>
+
+        <% if user_signed_in? %>
+        <ul class="navbar-nav text-light">
+            ようこそ！
+        </ul>
+        <% end %>
+
+      </div>
+    </div>
+  </nav>
+</header>

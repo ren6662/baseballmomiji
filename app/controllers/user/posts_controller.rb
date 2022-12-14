@@ -37,6 +37,7 @@ class User::PostsController < ApplicationController
 
   def destroy
   end
+  
 
   private
 

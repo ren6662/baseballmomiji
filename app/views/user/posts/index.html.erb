@@ -1,6 +1,6 @@
 <h2>test</h2>
 <% @post.each do |post| %>
 <!--showページに遷移に修正 -->
-<%= link_to post.title, user_posts_path %>
+<%= link_to post.title, user_post_path(post.id) %>
 <%= post.body %>
 <% end %>

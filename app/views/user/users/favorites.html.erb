@@ -1,0 +1,4 @@
+いいね一覧
+<% @favorite_posts.each do |post|%>
+<%= link_to post.title, user_post_path(post.id) %>
+<% end %>
