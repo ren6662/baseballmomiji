@@ -17,7 +17,7 @@
          </div>
         <% end %>
   		<!-- showページに遷移に修正 -->
-  		<%= link_to 'Show', root_path %> |
+  		<%= link_to 'Show', user_post_path(@post.id) %> |
   		<%= link_to 'Back', user_posts_path, class: "back" %>
   	</div>
   </div>

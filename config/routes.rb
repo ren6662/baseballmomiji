@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :user do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
+  get 'relationships/followings'
+  get 'relationships/followers'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "homes#top"
   get "home/about"=>"homes#about", as: 'about'
@@ -26,6 +32,10 @@ Rails.application.routes.draw do
       member do
         get :favorites
       end
+      resource :relationships, only: [:create, :destroy]
+       get 'followings' => 'relationships#followings', as: 'followings'
+       get 'followers' => 'relationships#followers', as: 'followers'
     end
   end
+  
 end
