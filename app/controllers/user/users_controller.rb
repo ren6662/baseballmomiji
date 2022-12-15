@@ -22,7 +22,7 @@ class User::UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :introduction, :is_deleted)
+    params.require(:user).permit(:name, :introduction, :is_deleted, :profile_image)
   end
   
   def set_user
