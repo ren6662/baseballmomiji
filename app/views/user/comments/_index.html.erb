@@ -1,0 +1,31 @@
+<% if post.comments.present? %>
+  <p>コメント件数：<%= post.comments.count %></p>
+<table>
+  <thead>
+    <tr>
+      <th>コメント投稿者</th>
+      <th>コメント内容</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% post.comments.each do |comment| %>
+      <tr>
+        <td>
+          <%= link_to user_user_path(comment.user) do %>
+            <%= image_tag comment.user.get_image(50, 50) %><br>
+            <%= comment.user.name %>
+          <% end %>
+        </td>
+        <td><%= comment.comment %></td>
+        <td>
+          <% if comment.user == current_user %>
+            <%= link_to "Destroy", user_post_comment_path(post, comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+<% else %>
+  <p>コメントはまだありません</p>
+<% end %>

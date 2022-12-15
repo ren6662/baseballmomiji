@@ -9,6 +9,8 @@ class User::PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments
+    @comment = current_user.comments.new
   end
 
   def edit
@@ -16,13 +18,13 @@ class User::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_prams)
+    @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-     redirect_to user_posts_path, notice: "投稿しました"
+      redirect_to request.referer, notice: "投稿しました"
     else
       @posts = Post.all
-      render "new"
+      redirect_to request.referer
     end
   end
 
@@ -41,7 +43,7 @@ class User::PostsController < ApplicationController
 
   private
 
-  def post_prams
+  def post_params
     params.require(:post).permit(:title,:body,:image)
   end
 

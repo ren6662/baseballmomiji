@@ -2,7 +2,10 @@
   <div class='row'>
     <div class='col-md-12'>
       <table class='table'>
-  <tr><!--image--></tr>
+  <tr>
+    <th>image</th>
+    <th><%= image_tag @user.get_image(100, 100) %></th>
+  </tr>
   <tr>
 	  <th>name</th>
 	  <th><%= @user.name %></th>
@@ -20,7 +23,7 @@
     <th><%= link_to @user.followers.count, user_user_followers_path(@user) %></th>
   </tr>
 </table>
-　
+
 <div class='row'>
   <% if current_user != @user %>
     <td><%= render "user/relationships/btn", user: @user %></td>
