@@ -15,4 +15,20 @@ class Post < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  
+  #検索機能（完全一致、部分一致、前方一致、後方一致）
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("title LIKE?","#{word}")
+    elsif search == "forward_match"
+      @post = Post.where("title LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("title LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("title LIKE?","%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
 end

@@ -22,6 +22,9 @@
     <main>
       <p id="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+      <div class="d-flex justify-content-center mb-2">
+          <%= render 'user/searches/search' %>
+        </div>
       <%= yield %>
     </main>
   </body>
