@@ -1,6 +1,36 @@
-<h2>test</h2>
-<% @post.each do |post| %>
-<!--showページに遷移に修正 -->
-<%= link_to post.title, user_post_path(post.id) %>
-<%= post.body %>
-<% end %>
+<div class = "container">
+  <h4 class="col-2 bg-light text-center">投稿一覧一覧</h4>
+  <div class ="row">
+    
+    <table class = "table table-bordered">
+      <thead class="bg-light">
+        <tr>
+          <td style="width:10%">投稿日</td>
+          <td>タイトル</td>
+          <td>内容</td>
+          <td>タグ</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @post.each do |post| %>
+        <tr>
+          <td class="align-middle"><%= post.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= link_to post.title, user_post_path(post.id) %></td>
+          <td><%= post.body %></td>
+          <td>
+            <i class="fas fa-tag"></i>　
+            <% post.tags.each do |tag| %>
+              <span class="badge badge-secondary"><%= tag.name %></span>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+  </div>
+</div>
+
+<% @tag_list.each do |list|%>
+<%=list.name %>
+<%="(#{list.posts.count})" %><% end %>

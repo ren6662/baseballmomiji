@@ -2,8 +2,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-         
+         :recoverable, :rememberable, :validatable,
+         :authentication_keys => [:name]
+
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   #フォロー機能
@@ -11,18 +12,23 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  
-  has_many :comments 
-  
+
+  has_many :comments
+
   has_one_attached :image
-         
+
+  #退会処理
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
   def self.guest
      find_or_create_by!(email: 'guest@example.com') do |user|
      user.password = SecureRandom.urlsafe_base64
      user.name = "ゲスト"
     end
   end
-  
+
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -30,7 +36,7 @@ class User < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
@@ -40,7 +46,7 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
   #検索機能（完全一致、部分一致、前方一致、後方一致
   def self.looks(search, word)
     if search == "perfect_match"
@@ -55,5 +61,5 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-  
+
 end

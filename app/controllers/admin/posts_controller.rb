@@ -1,7 +1,6 @@
-class User::PostsController < ApplicationController
+class Admin::PostsController < ApplicationController
   def index
     @post = Post.all
-    @tag_list=Tag.all
   end
   
   def new
@@ -10,47 +9,41 @@ class User::PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments
-    @comment = current_user.comments.new
-    @post_tags = @post.tags
   end
-
+  
   def edit
     @post = Post.find(params[:id])
-    @post.set_tag
   end
-
+  
   def create
-    @post = current_user.posts.build(post_params)
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
     if @post.save
-      redirect_to user_posts_path(@post), notice: "投稿しました"
+      redirect_to request.referer, notice: "投稿しました"
     else
       @posts = Post.all
       redirect_to request.referer
     end
   end
-
+  
   def update
     @post = Post.find(params[:id])
-    @post.touch
     if @post.update(post_params)
-      redirect_to user_posts_path, notice: "編集しました"
+      redirect_to admin_posts_path, notice: "編集しました"
     else
       render "edit"
     end
   end
-
+  
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to user_posts_path
+    redirect_to admin_posts_path
   end
-  
   
   private
 
   def post_params
-    params.require(:post).permit(:title,:body,:image,:tag)
+    params.require(:post).permit(:title,:body,:image)
   end
-
 end
