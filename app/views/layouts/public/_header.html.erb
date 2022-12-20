@@ -14,10 +14,13 @@
             <%= link_to "マイページ", user_user_path(current_user), class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
+            <%= link_to "ユーザー一覧", user_users_path, class: 'btn nav-link text-light mr-5' %>
+          </li>
+          <li>
             <%= link_to "新規投稿", new_user_post_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
-            <!--%= link_to "カート", cart_items_path, class: 'btn nav-link text-light mr-5' %-->
+            <%= link_to "投稿一覧", user_posts_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'btn nav-link text-light mr-5' %>
