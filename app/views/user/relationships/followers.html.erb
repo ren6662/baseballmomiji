@@ -1,2 +1,8 @@
-<h2>フォローしているユーザー</h2>
-<%= render "follow_list", users: @users %>
+<div class="container">
+  <div class="row">
+    <h3 class="col-md-5 text-center bg-danger text-light mt-3">フォローしているユーザー</h3>
+    <div class="col-md-10 mt-4">
+      <%= render "follow_list", users: @users %>
+    </div>
+  </div>
+</div>

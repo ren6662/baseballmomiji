@@ -4,3 +4,12 @@
 .image {
   background-image: url("../images/itukushima.jpg")
 }
+
+.line-break {
+ word-break: break-all;
+ white-space: normal;
+}
+
+th,td{
+ white-space: nowrap;
+}

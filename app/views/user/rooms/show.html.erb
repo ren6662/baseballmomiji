@@ -2,34 +2,32 @@
   <div class = "row">
     <div class = "col-md-12">
       <div class="chat-room">
-       <h1>メッセージ</h1>
-       <% @user.each do |r| %>
-       <div class="user-name">
-       <strong>
-             <%= image_tag r.get_image(50, 50) %>
-             <%= link_to r.name, user_user_path(r.id) %>
-       </strong>
-       </div>
-       <% end %>
-
-       <hr>
-       <div class="chats">
-
-       <div class="chat">
-         <% if @messages.present? %>
-           <% @messages.each do |m| %>
-             <div class="chat-box">
-               <div class="chat-text">
-                 <%= m.body %>
-                 <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
-               </div>
-             </div>
-           <% end %>
-           <%else%>
-             <p>メッセージはまだありません</p>
-         <% end %>
-        </div>
-
+        <h1>メッセージ</h1>
+        <% @user.each do |r| %>
+          <strong>
+            <%= image_tag r.get_image(50, 50) %>
+            <%= link_to r.name, user_user_path(r.id) %>
+          </strong>
+        <% end %>
+        <% if @messages.present? %>
+          <% @messages.each do |m| %>
+            <% if m.user_id == current_user.id %>
+              <div>
+                <strong><%= current_user.name %></strong>
+                <%= m.body %>
+              </div>
+              <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
+            <% else %>
+              <div>
+                <strong><%= m.user.name %></strong>
+                <%= m.body %>
+              </div>
+              <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
+            <% end %>
+          <% end %>
+        <%else%>
+          <p>メッセージはまだありません</p>
+        <% end %>
        <div class="posts">
          <%= form_with model: @message, url: user_messages_path, local: true do |f| %>
            <%= f.text_field :body, placeholder: "メッセージを入力してください" %>

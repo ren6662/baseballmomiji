@@ -1,51 +1,76 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
-    <div class='col-md-10'>
-      <table class='table'>
-        <tr>
-          <th>image</th>
-          <th><%= image_tag @user.get_image(100, 100) %></th>
+    <div class='col-md-12'>
+      <h2 class="text-center mt-5"><%= @user.name %>さんのぺージ</h2>
+
+      <table class="container table table-borderless">
+        <tr class="row">
+         <td class="col text-center mt-3">
+           <h5 class="font-weight-bold">会員情報</h5>
+         </td>
         </tr>
         <tr>
-      	  <th>name</th>
-      	  <th><%= @user.name %></th>
-        </tr>
-        <tr>
-      	  <th>introduction</th>
-      	  <th><%= @user.introduction %></th>
-        </tr>
-        <tr>
-          <th>follows</th>
-          <th><%= link_to @user.followings.count, user_user_followings_path(@user) %></th>
-        </tr>
-        <tr>
-          <th>followers</th>
-          <th><%= link_to @user.followers.count, user_user_followers_path(@user) %></th>
+          <td class="col text-center">
+           <% if @user == current_user %>
+           <%= link_to "編集する", edit_user_user_path(@user), class: "text-dark btn btn-outline-warning btn-sm "%>
+          <% end %>
+         </td>
         </tr>
       </table>
 
-    <div class='row'>
-      <% if current_user != @user %>
-        <td><%= render "user/relationships/btn", user: @user %></td>
-      <% else %>
-      <%= link_to edit_user_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-        <i class="fas fa-user-cog"></i>
-      <% end %>
-      <% end %>
-   </div>
-  </div>
-  <div class="col-md-2">
-    <% unless @user.id == current_user.id %>
-     <% if @is_room == true %>
-       <%= link_to "ダイレクトメッセージ", user_room_path(@room_id) %>
-     <% else %>
-       <%= form_with model: @room, url: user_rooms_path, local: true do |f|%>
-         <%= fields_for @entry do |r| %>
-           <%= r.hidden_field :user_id, value: @user.id %>
-       <% end %>
-        <%= f.submit "チャットを始める" %>
+      <div class="card mx-auto shadow-lg">
+      <table class='table nowrap mt-3'>
+        <tbody>
+          <tr>
+          <td>image</td>
+          <td class="text-center"><%= image_tag @user.get_image(100, 100) %></td>
+        </tr>
+        <tr>
+      	  <td>name</td>
+      	  <td class="text-center"><%= @user.name %></td>
+        </tr>
+        <tr>
+      	  <td>introduction</td>
+      	  <td class="text-center line-break"><%= @user.introduction %></td>
+        </tr>
+        <tr>
+          <td>follows</td>
+          <td class="text-center"><%= link_to @user.followings.count, user_user_followings_path(@user) %></td>
+        </tr>
+        <tr>
+          <td>followers</td>
+          <td class="text-center"><%= link_to @user.followers.count, user_user_followers_path(@user) %></td>
+        </tr>
+        <tr>
+          <td class="pl-5">
+             <% if current_user != @user %>
+               <%= render "user/relationships/btn", user: @user %>
+             <% end %>
+          </td>
+          <td class="pr-5">
+            <!--ダイレクトメッセージ-->
+          <% unless @user.id == current_user.id %>
+         <% if @is_room == true %>
+           <%= link_to "ダイレクトメッセージ", user_room_path(@room_id,user_id: @user.id) , class: "btn btn-primary"%>
+         <% else %>
+           <%= form_with model: @room, url: user_rooms_path, local: true do |f|%>
+             <%= fields_for @entry do |r| %>
+               <%= r.hidden_field :user_id, value: @user.id %>
+           <% end %>
+            <%= f.submit "チャットを始める" , class: "btn btn-primary" %>
+             <% end %>
          <% end %>
-     <% end %>
-    <% end %>
+        <% end %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+
+
+
+      </div>
+
+   </div>
   </div>
 </div>

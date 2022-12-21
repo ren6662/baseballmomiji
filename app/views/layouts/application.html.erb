@@ -20,11 +20,10 @@
     <% end %>
 
     <main>
-      <p id="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <div class="d-flex justify-content-center mb-2">
-          <%= render 'user/searches/search' %>
-        </div>
+      <% if flash[:notice] %>
+       <div class="alert alert-success" role="alert">
+       <p class="notice text-center" style="color:green;"><%= flash[:notice] %></p></div>
+      <% end %>
       <%= yield %>
     </main>
   </body>

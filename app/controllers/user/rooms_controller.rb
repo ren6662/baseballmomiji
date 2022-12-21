@@ -24,6 +24,6 @@ class User::RoomsController < ApplicationController
     @message = Message.new
     @entries = @room.entries
     @another_entry = @entries.where.not(user_id: current_user.id).first
-    @user = User.where(id: params[:id])
+    @user = User.where(id: params[:user_id])
   end
 end
