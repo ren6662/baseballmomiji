@@ -1,24 +1,31 @@
-<h2>検索結果</h2>
+<div class="container">
+  <div class="col-12">
+    <h2>検索結果</h2>
 
-<table class="table table-hover table-inverse">
-  <!--検索対象モデルがUserの時 -->
-  <% if @range == "ユーザー" %>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= link_to user.name, user_user_path(user) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% else %>
-    <!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->
-    <tbody>
-      <% @posts.each do |post| %>
-        <tr>
-          <td><%= link_to post.title, user_post_path(post) %></td>
-          <td><%= post.body %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% end %>
-</table>
+      <table class="table table-hover table-inverse">
+        <!--検索対象モデルがUserの時 -->
+        <% if @range == "ユーザー" %>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>名前</td>
+                <td><%= link_to user.name, user_user_path(user) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% else %>
+          <!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><strong>タイトル</strong></td>
+                <td><%= link_to post.title, user_post_path(post) %></td>
+                <td><strong>本文</strong></td>
+                <td><%= post.body %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+  </div>
+</div>

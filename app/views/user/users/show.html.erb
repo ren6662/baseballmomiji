@@ -12,8 +12,11 @@
         <tr>
           <td class="col text-center">
            <% if @user == current_user %>
-           <%= link_to "編集する", edit_user_user_path(@user), class: "text-dark btn btn-outline-warning btn-sm "%>
+           <%= link_to "編集する", edit_user_user_path(@user), class: "text-dark btn btn-outline-warning btn-sm" %>
           <% end %>
+         </td>
+         <td>
+           <%= link_to "いいね一覧", favorites_user_user_path(@user), class: "text-dark btn btn-outline-danger btn-sm" %>
          </td>
         </tr>
       </table>

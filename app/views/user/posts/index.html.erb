@@ -1,22 +1,21 @@
 <div class = "container">
-  <h4 class="col-2 bg-light text-center">投稿一覧一覧</h4>
-  <div class ="row">
+  <h2 class="mt-5 text-center">投稿一覧</h2>
     
     <table class = "table table-bordered">
       <thead class="bg-light">
         <tr>
-          <td style="width:10%">投稿日</td>
-          <td>タイトル</td>
-          <td>内容</td>
-          <td>タグ</td>
+          <th style="width:10%">投稿日</th>
+          <th>タイトル</th>
+          <th>内容</th>
+          <th>タグ</th>
         </tr>
       </thead>
       <tbody>
         <% @post.each do |post| %>
         <tr>
           <td class="align-middle"><%= post.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= link_to post.title, user_post_path(post.id) %></td>
-          <td><%= post.body %></td>
+          <td class="align-middle"><%= link_to post.title, user_post_path(post.id) %></td>
+          <td class="line-break"><%= post.body %></td>
           <td>
             <i class="fas fa-tag"></i>　
             <% post.tags.each do |tag| %>
@@ -28,9 +27,12 @@
       </tbody>
     </table>
     
-  </div>
+    <p>タグ一覧</p>
+    <% @tag_list.each do |list|%>
+    <!--タグの一覧のビューを実装したい-->
+    <%=list.name %>
+    <%="(#{list.posts.count})" %><% end %>
+    
 </div>
 
-<% @tag_list.each do |list|%>
-<%=list.name %>
-<%="(#{list.posts.count})" %><% end %>
+

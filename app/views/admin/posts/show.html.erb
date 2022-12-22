@@ -1,0 +1,63 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2 class="text-center mt-5">投稿詳細</h2>
+  		<table class='table table-bordered'>
+  		  <tr>
+          <td>
+            <%= image_tag @post.get_image(100, 100) %><br>
+            <div class="ml-1">
+              <%= @post.user.name %>
+            </div>
+          </td>
+          <td>
+              <%= @post.title %><br>
+              <% @post_tags.each do |tag| %>
+              <%=tag.name%><%="(#{tag.posts.count})" %><% end %>
+          </td>
+          <td ></td>
+          <td>コメント数: <%= @post.comments.count %></td>
+        </tr>
+        <tr>
+          <td class="line-break", colspan="5"><%= @post.body %></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="text-center">
+              <%= link_to 'Destroy', admin_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-lg btn-danger"%>
+          </td>
+        </tr>
+      </table>
+      <div id="comments_area">
+         <% if @post.comments.present? %>
+        <p>コメント件数：<%= @post.comments.count %></p>
+          <table>
+            <thead>
+              <tr>
+                <th>コメント投稿者</th>
+                <th>コメント内容</th>
+              </tr>
+            </thead>
+              <tbody>
+                <% @post.comments.each do |comment| %>
+                  <tr>
+                    <td>
+                      <%= link_to admin_user_path(comment.user) do %>
+                        <%= image_tag comment.user.get_image(50, 50) %><br>
+                        <%= comment.user.name %>
+                      <% end %>
+                    </td>
+                    <td><%= comment.comment %></td>
+                    <td>
+                      <%= link_to "Destroy", admin_post_comment_path(@post, comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
+                    </td>
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+        <% else %>
+        <p>コメントはまだありません</p>
+        <% end %>
+      </div>
+  	</div>
+  </div>
+</div>

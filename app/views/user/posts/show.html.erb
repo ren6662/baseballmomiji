@@ -1,29 +1,40 @@
 <div class='container'>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>Post detail</h2>
-  		<table class='table'>
+      <h2 class="text-center mt-5">投稿詳細</h2>
+  		<table class='table table-bordered'>
   		  <tr>
           <td>
             <%= image_tag @post.get_image(100, 100) %><br>
-            <%= @post.user.name %>
+            <div class="ml-1">
+              <%= @post.user.name %>
+            </div>
           </td>
-          <td><%= @post.title %></td>
-          <td><%= @post.body %></td>
-          <td><% @post_tags.each do |tag| %>
+          <td>
+              <%= @post.title %><br>
+              <% @post_tags.each do |tag| %>
               <%=tag.name%><%="(#{tag.posts.count})" %><% end %>
           </td>
           <td id="favorite_buttons_<%= @post.id %>"><%= render "user/favorites/favorite-btn", post: @post %></td>
-          <!--td>コメント数: <%= @post.comments.count %></td-->
-          <td><% if @post.user == current_user %>
-                <%= link_to 'Edit', edit_user_post_path(@post), class: "btn btn-sm btn-success" %>
-                <% end %>
+          <td>コメント数: <%= @post.comments.count %></td>
+        </tr>
+        <tr>
+          <td class="line-break", colspan="5"><%= @post.body %></td>
+        </tr>
+        <% if @post.user == current_user %>
+        <tr>
+          <td colspan="2" class="text-center">
+            <% if @post.user == current_user %>
+             <%= link_to 'Edit', edit_user_post_path(@post), class: "btn btn-lg btn-success" %>
+            <% end %>
           </td>
-          <td><% if @post.user == current_user %>
-                 <%= link_to 'Destroy', user_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
-                 <% end %>
+          <td colspan="3" class="text-center">
+            <% if @post.user == current_user %>
+              <%= link_to 'Destroy', user_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-lg btn-danger"%>
+            <% end %>
           </td>
         </tr>
+        <% end %>
       </table>
       <div id="comments_area">
          <%= render "user/comments/index", post: @post %>

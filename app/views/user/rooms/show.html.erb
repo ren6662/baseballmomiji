@@ -1,8 +1,8 @@
 <div class = "container">
   <div class = "row">
     <div class = "col-md-12">
-      <div class="chat-room">
-        <h1>メッセージ</h1>
+      <div class="chat-room text-center">
+        <h1 class="mt-5">メッセージ</h1>
         <% @user.each do |r| %>
           <strong>
             <%= image_tag r.get_image(50, 50) %>
@@ -30,9 +30,9 @@
         <% end %>
        <div class="posts">
          <%= form_with model: @message, url: user_messages_path, local: true do |f| %>
-           <%= f.text_field :body, placeholder: "メッセージを入力してください" %>
+           <%= f.text_area :body, placeholder: "メッセージを入力してください", class: "col-md-4" %>
            <%= f.hidden_field :room_id, value: @room.id %>
-           <%= f.submit "送信する" %>
+           <%= f.submit "送信する",class: "btn btn-success mb-5" %>
          <% end %>
        </div>
 

@@ -1,6 +1,7 @@
 class Admin::PostsController < ApplicationController
   def index
     @post = Post.all
+    @tag_list=Tag.all
   end
   
   def new
@@ -9,10 +10,13 @@ class Admin::PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    @post_tags = @post.tags
+    @comments = @post.comments
   end
   
   def edit
     @post = Post.find(params[:id])
+    @post.set_tag
   end
   
   def create
@@ -44,6 +48,6 @@ class Admin::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:body,:image)
+    params.require(:post).permit(:title,:body,:imag,:tag)
   end
 end

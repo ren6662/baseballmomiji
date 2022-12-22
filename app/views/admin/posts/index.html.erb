@@ -1,0 +1,36 @@
+<div class = "container">
+  <h2 class="mt-5 text-center">投稿一覧</h2>
+    
+    <table class = "table table-bordered">
+      <thead class="bg-light">
+        <tr>
+          <th style="width:10%">投稿日</th>
+          <th>タイトル</th>
+          <th>内容</th>
+          <th>タグ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @post.each do |post| %>
+        <tr>
+          <td class="align-middle"><%= post.created_at.strftime('%Y/%m/%d') %></td>
+          <td class="align-middle"><%= link_to post.title, admin_post_path(post.id) %></td>
+          <td class="line-break"><%= post.body %></td>
+          <td>
+            <i class="fas fa-tag"></i>　
+            <% post.tags.each do |tag| %>
+              <span class="badge badge-secondary"><%= tag.name %></span>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <p>タグ一覧</p>
+    <% @tag_list.each do |list|%>
+    <!--タグの一覧のビューを実装したい-->
+    <%=list.name %>
+    <%="(#{list.posts.count})" %><% end %>
+    
+</div>

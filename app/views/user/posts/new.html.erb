@@ -1,26 +1,26 @@
 <div class='container'>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-  		<h1>投稿編集</h1>
+  		<h2 class="mt-5">新規投稿</h2>
       <%= form_with(model: @post, url: user_posts_path, method: "POST", local:true) do |f| %>
        <div class="form-group">
-          <%= f.label :title %>
+          <%= f.label :"タイトル" %>
           <%= f.text_field :title, class: 'form-control post_title' %>
         </div>
         <div class="form-group">
-          <%= f.label :opinion %>
+          <%= f.label :"本文" %>
           <%= f.text_area :body, class: 'form-control post_body' %>
         </div>
         <div class="field">
-          <%= f.label :tag %><br />
+          <%= f.label :"タグ" %><br />
           <%= f.text_field :tag, class: 'form-control',placeholder: "タグを複数つけるには' , 'で区切ってください" %>
         </div>
         <div class="field">
-          <%= f.label :image %><br />
+          <%= f.label :"画像" %><br />
           <%= f.file_field :image, class: 'form-control' %>
         </div>
         <div class="form-group">
-          <%= f.submit "投稿",class: 'btn btn-success' %>
+          <%= f.submit "投稿",class: 'btn btn-success mt-3' %>
         </div>
       <% end %>
   	</div>
