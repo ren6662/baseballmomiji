@@ -17,6 +17,13 @@ class Public::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+  
+  ##ゲストログイン機能
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
 
   protected
 
@@ -25,10 +32,5 @@ class Public::SessionsController < Devise::SessionsController
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
   
-  ##ゲストログイン機能
-  def guest_sign_in
-    user = User.guest
-    sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
-  end
+  
 end

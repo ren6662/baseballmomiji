@@ -5,8 +5,7 @@
   		<table class='table table-bordered'>
   		  <tr>
           <td>
-            <%= image_tag @post.get_image(100, 100) %><br>
-            <div class="ml-1">
+            <div class="ml-1 m">
               <%= @post.user.name %>
             </div>
           </td>
@@ -23,12 +22,15 @@
         </tr>
         <% if @post.user == current_user %>
         <tr>
-          <td colspan="2" class="text-center">
+          <td colspan="3" class="text-center">
+            <%= image_tag @post.get_image(100, 100) %>
+          </td>
+          <td class="text-center">
             <% if @post.user == current_user %>
              <%= link_to 'Edit', edit_user_post_path(@post), class: "btn btn-lg btn-success" %>
             <% end %>
           </td>
-          <td colspan="3" class="text-center">
+          <td class="text-center">
             <% if @post.user == current_user %>
               <%= link_to 'Destroy', user_post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-lg btn-danger"%>
             <% end %>
