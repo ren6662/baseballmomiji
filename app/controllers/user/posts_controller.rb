@@ -2,7 +2,7 @@ class User::PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @post = Post.all
+    @post = Post.page(params[:page]).per(8)
     @tag_list=Tag.all
   end
 

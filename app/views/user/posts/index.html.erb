@@ -26,6 +26,9 @@
         <% end %>
       </tbody>
     </table>
+    <div class=" d-flex mb-3 justify-content-center">
+      <%= paginate @post %>
+  </div>
     
     <p>タグ一覧</p>
     <% @tag_list.each do |list|%>
