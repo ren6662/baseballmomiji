@@ -66,3 +66,4 @@ gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
 gem 'haml-rails'
+gem 'kaminari','~> 1.2.1'

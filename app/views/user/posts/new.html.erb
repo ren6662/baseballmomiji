@@ -2,7 +2,8 @@
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
   		<h2 class="mt-5">新規投稿</h2>
-      <%= form_with(model: @post, url: user_posts_path, method: "POST", local:true) do |f| %>
+      <%= form_with(model: @post, url: user_posts_path, method: "POST", local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
        <div class="form-group">
           <%= f.label :"タイトル" %>
           <%= f.text_field :title, class: 'form-control post_title' %>

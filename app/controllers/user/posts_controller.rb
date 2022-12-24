@@ -1,13 +1,15 @@
 class User::PostsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @post = Post.all
     @tag_list=Tag.all
   end
-  
+
   def new
     @post = Post.new
   end
-  
+
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
@@ -26,7 +28,8 @@ class User::PostsController < ApplicationController
       redirect_to user_posts_path(@post), notice: "投稿しました"
     else
       @posts = Post.all
-      redirect_to request.referer
+      render :new
+#      redirect_to request.referer
     end
   end
 
@@ -45,8 +48,8 @@ class User::PostsController < ApplicationController
     @post.destroy
     redirect_to user_posts_path
   end
-  
-  
+
+
   private
 
   def post_params

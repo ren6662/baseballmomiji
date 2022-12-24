@@ -1,4 +1,6 @@
 class Admin::PostsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @post = Post.all
     @tag_list=Tag.all
@@ -26,7 +28,8 @@ class Admin::PostsController < ApplicationController
       redirect_to request.referer, notice: "投稿しました"
     else
       @posts = Post.all
-      redirect_to request.referer
+      render :new
+#      redirect_to request.referer
     end
   end
 

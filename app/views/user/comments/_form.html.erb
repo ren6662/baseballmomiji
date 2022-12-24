@@ -1,5 +1,7 @@
 <%= form_with(model: [post, comment], url: user_post_comments_path(post), method: "POST",local: false) do |f| %>
-  <%= render 'layouts/error_messages', model: f.object %>
+  <div id="error_messages">
+    <%= render 'layouts/error_messages', model: f.object %>
+  </div>
   <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "w-100" %><br>
   <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
 <% end %>
