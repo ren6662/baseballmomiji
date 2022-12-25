@@ -45,6 +45,7 @@ class Post < ApplicationRecord
   end
   
   def create_tag
+    return if self.tag.nil?
     tag_names = self.tag.gsub(/[[:blank:]]/, '').split(",").compact
     tag_names.each do |name|
       tag = Tag.find_or_create_by(name: name)
