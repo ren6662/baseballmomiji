@@ -7,19 +7,21 @@
     width: 1200px;
     height: 300px;
 }
-</style>
-  <div class = "col-md-12">
-   <div class="image">
-    <div class ="text-center mt-5 mx-auto pt-3 pb-3" style="background-color:rgba(255,255,254,0.5);">
-     <h1>BHMを使って野球友達を見つけよう！！</h1>
-     <p>このサイトは広島付近の野球好きの人のコミュニティを広げるためのSNSとなります。<br>
-       投稿、チャット等は会員登録が必要です<br>
-       <% unless user_signed_in? %>
-       <%= link_to "登録はこちら", new_user_registration_path,class: "btn btn-primary" %>
-       <% end %>
-    </div>
+  </style>
+   <div class = "col-md-12">
+    
+    <div class="image">
+     <div class ="text-center mt-5 mx-auto pt-3 pb-3" style="background-color:rgba(255,255,254,0.5);">
+       <h1>BHMを使って野球友達を見つけよう！！</h1>
+       <p>このサイトは広島付近の野球好きの人のコミュニティを広げるためのSNSとなります。<br>
+         投稿、チャット等は会員登録が必要です<br>
+         <% unless user_signed_in? %>
+         <%= link_to "登録はこちら", new_user_registration_path,class: "btn btn-primary" %>
+         <% end %>
+      </div>
      </p>
     </div>
+    
   </div>
  </div>
 </div>

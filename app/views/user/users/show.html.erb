@@ -12,8 +12,8 @@
         <tr>
           <td class="col text-center">
            <% if @user == current_user %>
-           <%= link_to "編集する", edit_user_user_path(@user), class: "text-dark btn btn-outline-warning btn-sm" %>
-          <% end %>
+            <%= link_to "編集する", edit_user_user_path(@user), class: "text-dark btn btn-outline-warning btn-sm" %>
+           <% end %>
          </td>
          <td>
            <%= link_to "いいね一覧", favorites_user_user_path(@user), class: "text-dark btn btn-outline-danger btn-sm" %>
@@ -22,58 +22,54 @@
       </table>
 
       <div class="card mx-auto shadow-lg">
-      <table class='table nowrap mt-3'>
-        <tbody>
-          <tr>
-          <td style="width: 10%">image</td>
-          <td class="text-center"><%= image_tag @user.get_image(100, 100) %></td>
-        </tr>
-        <tr>
-      	  <td>name</td>
-      	  <td class="text-center"><%= @user.name %></td>
-        </tr>
-        <tr>
-      	  <td>introduction</td>
-      	  <td class="text-center line-break"><%= @user.introduction %></td>
-        </tr>
-        <tr>
-          <td>follows</td>
-          <td class="text-center"><%= link_to @user.followings.count, user_user_followings_path(@user) %></td>
-        </tr>
-        <tr>
-          <td>followers</td>
-          <td class="text-center"><%= link_to @user.followers.count, user_user_followers_path(@user) %></td>
-        </tr>
-        <tr>
-          <td class="pl-5">
-             <% if current_user != @user %>
-               <%= render "user/relationships/btn", user: @user %>
-             <% end %>
-          </td>
-          <td class="pr-5">
-            <!--ダイレクトメッセージ-->
-          <% unless @user.id == current_user.id %>
-         <% if @is_room == true %>
-           <%= link_to "ダイレクトメッセージ", user_room_path(@room_id,user_id: @user.id) , class: "btn btn-primary"%>
-         <% else %>
-           <%= form_with model: @room, url: user_rooms_path, local: true do |f|%>
-             <%= fields_for @entry do |r| %>
-               <%= r.hidden_field :user_id, value: @user.id %>
-           <% end %>
-            <%= f.submit "チャットを始める" , class: "btn btn-primary" %>
-             <% end %>
-         <% end %>
-        <% end %>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
-
-
-
+        <table class='table nowrap mt-3'>
+          <tbody>
+            <tr>
+             <td style="width: 10%">image</td>
+             <td class="text-center"><%= image_tag @user.get_image(100, 100) %></td>
+            </tr>
+            <tr>
+             <td>name</td>
+             <td class="text-center"><%= @user.name %></td>
+            </tr>
+            <tr>
+          	  <td>introduction</td>
+          	  <td class="text-center line-break"><%= @user.introduction %></td>
+            </tr>
+            <tr>
+              <td>follows</td>
+              <td class="text-center"><%= link_to @user.followings.count, user_user_followings_path(@user) %></td>
+            </tr>
+            <tr>
+              <td>followers</td>
+              <td class="text-center"><%= link_to @user.followers.count, user_user_followers_path(@user) %></td>
+            </tr>
+            <tr>
+              <td class="pl-5">
+                 <% if current_user != @user %>
+                   <%= render "user/relationships/btn", user: @user %>
+                 <% end %>
+              </td>
+              <td class="pr-5">
+                <!--ダイレクトメッセージ-->
+              <% unless @user.id == current_user.id %>
+              <% if @is_room == true %>
+               <%= link_to "ダイレクトメッセージ", user_room_path(@room_id,user_id: @user.id) , class: "btn btn-primary"%>
+              <% else %>
+               <%= form_with model: @room, url: user_rooms_path, local: true do |f|%>
+                 <%= fields_for @entry do |r| %>
+                   <%= r.hidden_field :user_id, value: @user.id %>
+                 <% end %>
+                <%= f.submit "チャットを始める" , class: "btn btn-primary" %>
+                 <% end %>
+                <% end %>
+               <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
+      
    </div>
   </div>
 </div>
