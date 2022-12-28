@@ -40,6 +40,10 @@
         </tr>
         <% end %>
       </table>
+      
+      <!-- 投稿日時の表示 -->
+      <!--<%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>-->
+      
       <div id="comments_area">
          <%= render "user/comments/index", post: @post %>
       </div>
