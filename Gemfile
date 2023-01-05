@@ -67,3 +67,4 @@ gem "net-pop"
 gem "net-imap"
 gem 'haml-rails'
 gem 'kaminari','~> 1.2.1'
+gem "font-awesome-rails"
