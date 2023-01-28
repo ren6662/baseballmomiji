@@ -46,11 +46,18 @@ class User::UsersController < ApplicationController
   
   def withdrawal
     @user = User.find(params[:id])
+    # ゲストユーザーを退会できないようにする
+    if @user.email == 'guest@example.com'
+      reset_session
+      flash[:notice] = "ゲストユーザーは退会できません"
+      redirect_to :root
+    else
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @user.update(is_deleted: true)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
+    end
   end
   
   def unsubscribe
